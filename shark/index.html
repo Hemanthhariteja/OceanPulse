@@ -228,9 +228,10 @@
     </div>
 
     <script type="module">
-        import * as THREE from 'three';
-        import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-        import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/controls/OrbitControls.js';
+    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/GLTFLoader.js';
+    import { DRACOLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/DRACOLoader.js';
 
         // Scene setup
         const scene = new THREE.Scene();
@@ -295,7 +296,11 @@
         // Load the GLB model
         let model = null;
         let mixer = null;
-        const loader = new GLTFLoader();
+    const loader = new GLTFLoader();
+    // Configure DRACO loader so browsers can decode Draco-compressed GLBs
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.1/examples/js/libs/draco/');
+    loader.setDRACOLoader(dracoLoader);
 
         loader.load(
             'great_white_shark.glb',
