@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FileText, Download } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { Button } from "../ui/button";
 
 export default function NarrationPanel({ 
   currentChapter, 
