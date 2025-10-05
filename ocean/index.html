@@ -225,9 +225,10 @@
     </div>
 
     <script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js';
-    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/controls/OrbitControls.js';
-    import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/FBXLoader.js';
+    async function init() {
+        const THREE = (await import('three')).default || await import('three');
+        const { OrbitControls } = await import('three/examples/jsm/controls/OrbitControls.js');
+        const { FBXLoader } = await import('three/examples/jsm/loaders/FBXLoader.js');
 
         // Scene setup
         const scene = new THREE.Scene();
@@ -341,36 +342,36 @@
                 const box = new THREE.Box3().setFromObject(model);
                 const center = box.getCenter(new THREE.Vector3());
                 const size = box.getSize(new THREE.Vector3());
-                
+
                 console.log('Model size:', size);
                 console.log('Model center:', center);
-                
+
                 // Scale ocean very large to extend beyond viewport edges
                 const maxDim = Math.max(size.x, size.z);
                 const scale = 80 / maxDim; // Very large scale for full coverage
                 model.scale.setScalar(scale);
-                
+
                 // Recalculate after scaling
                 box.setFromObject(model);
                 box.getCenter(center);
-                
+
                 // Position ocean at bottom half of viewport
                 model.position.x = -center.x;
                 model.position.y = -15; // Push down to create horizon at middle
                 model.position.z = -center.z - 10; // Push back for depth
-                
+
                 // Slight tilt for perspective
                 model.rotation.x = -Math.PI / 6; // Gentle tilt to show waves
-                
+
                 console.log('Model positioned at:', model.position);
                 console.log('Model scale:', model.scale);
-                
+
                 // Camera positioned to show ocean below and black sky above
                 camera.position.set(0, 0, 8); // Eye level view
                 camera.lookAt(0, -8, -10); // Look at ocean surface
                 controls.target.set(0, -8, -10);
                 controls.update();
-                
+
                 console.log('Camera positioned at:', camera.position);
 
                 // Check for animations
@@ -451,6 +452,8 @@
         }
 
         animate();
+    }
+    init();
     </script>
 </body>
 </html>

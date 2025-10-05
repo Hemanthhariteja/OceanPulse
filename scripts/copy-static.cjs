@@ -49,6 +49,24 @@ if (fs.existsSync(optimizedRoot)) {
   }
 }
 
+// Copy DRACO decoder files from node_modules into dist/assets/draco so DRACOLoader can find them
+try {
+  const dracoSrc = path.join(root, 'node_modules', 'three', 'examples', 'js', 'libs', 'draco')
+  const dracoDest = path.join(dist, 'assets', 'draco')
+  if (fs.existsSync(dracoSrc)) {
+    fs.mkdirSync(dracoDest, { recursive: true })
+    const dracoEntries = fs.readdirSync(dracoSrc)
+    for (const entry of dracoEntries) {
+      const s = path.join(dracoSrc, entry)
+      const d = path.join(dracoDest, entry)
+      fs.copyFileSync(s, d)
+      console.log(`Copied DRACO decoder file ${entry} to dist/assets/draco/`)
+    }
+  }
+} catch (e) {
+  console.warn('Could not copy DRACO decoder files:', e.message)
+}
+
 // Also copy top-level static files (mp3, glb, jpg) used by the site
 const STATIC_EXTS = ['.mp3', '.glb', '.jpg', '.png', '.fbx']
 const rootEntries = fs.readdirSync(root, { withFileTypes: true })
