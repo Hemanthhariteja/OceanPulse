@@ -6,11 +6,11 @@ import { AudioChapter } from "../Entities/AudioChapter";
 import { Button } from "../Components/ui/button";
 import { ArrowLeft, Download } from "lucide-react";
 
-import CustomAudioPlayer from "../components/deepdive/CustomAudioPlayer";
-import DataLayerMap from "../components/deepdive/DataLayerMap";
-import NarrationPanel from "../components/deepdive/NarrationPanel";
-import StatsWidget from "../components/deepdive/StatsWidget";
-import MissionGallery from "../components/deepdive/MissionGallery";
+import CustomAudioPlayer from "../Components/deepdive/CustomAudioPlayer";
+import DataLayerMap from "../Components/deepdive/DataLayerMap";
+import NarrationPanel from "../Components/deepdive/NarrationPanel";
+import StatsWidget from "../Components/deepdive/StatsWidget";
+import MissionGallery from "../Components/deepdive/MissionGallery";
 
 export default function EarthDeepDive() {
   const navigate = useNavigate();
