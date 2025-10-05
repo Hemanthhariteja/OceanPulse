@@ -15,6 +15,7 @@ export default defineConfig({
     open: true
   },
   preview: {
-    allowedHosts: ['oceanpulse-3.onrender.com']
+    // Allow any Render subdomain for this service (deploys may change hostname)
+    allowedHosts: [/\.onrender\.com$/]
   }
 })
