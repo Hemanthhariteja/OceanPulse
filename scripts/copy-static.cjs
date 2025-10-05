@@ -26,6 +26,29 @@ for (const folder of STATIC_FOLDERS) {
   console.log(`Copied ${src} -> ${dest}`)
 }
 
+// If optimized models exist, overwrite the copied glb files with optimized versions
+const optimizedRoot = path.join(root, 'optimized')
+if (fs.existsSync(optimizedRoot)) {
+  const optimizedFiles = []
+  function findOptimized(dir) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true })
+    for (const entry of entries) {
+      const full = path.join(dir, entry.name)
+      if (entry.isDirectory()) findOptimized(full)
+      else if (path.extname(entry.name).toLowerCase() === '.glb') optimizedFiles.push(full)
+    }
+  }
+  findOptimized(optimizedRoot)
+  for (const opt of optimizedFiles) {
+    const rel = path.relative(optimizedRoot, opt)
+    const target = path.join(dist, rel)
+    const targetDir = path.dirname(target)
+    if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true })
+    fs.copyFileSync(opt, target)
+    console.log(`Overwrote with optimized model: ${target}`)
+  }
+}
+
 // Also copy top-level static files (mp3, glb, jpg) used by the site
 const STATIC_EXTS = ['.mp3', '.glb', '.jpg', '.png', '.fbx']
 const rootEntries = fs.readdirSync(root, { withFileTypes: true })
