@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-cyan: #00d9ff;
+  --secondary-cyan: #0ea5e9;
+  --deep-black: #0a0e1a;
+  --dark-gray: #0f1419;
+  --accent-glow: rgba(0, 217, 255, 0.3);
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .heading-font {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.glow-text {
+  text-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
+}
+
+.pulse-animation {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+  25% {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px var(--accent-glow), 0 0 60px var(--accent-glow);
+  }
+  50% {
+    transform: scale(1);
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+}
+
+.holographic-border {
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  box-shadow: inset 0 0 20px rgba(0, 217, 255, 0.1);
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: ocean-pulse
+    env: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    autoDeploy: true
