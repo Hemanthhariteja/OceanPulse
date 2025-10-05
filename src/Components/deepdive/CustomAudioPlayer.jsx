@@ -1,6 +1,6 @@
 import React from "react";
 import { Play, Pause, Volume2, VolumeX, SkipForward, SkipBack } from "lucide-react";
-import { Slider } from "../../components/ui/slider";
+import { Slider } from "../ui/slider";
 
 export default function CustomAudioPlayer({ 
   audioRef, 
