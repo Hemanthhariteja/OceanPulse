@@ -4,4 +4,6 @@ services:
     env: static
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
+    # A lightweight health check path to help render determine service readiness
+    healthCheckPath: /index.html
     autoDeploy: true
